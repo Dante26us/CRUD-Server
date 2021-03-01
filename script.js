@@ -19,7 +19,8 @@ app.get('/:id', function (req, res) {
   // First read existing users.
   fs.readFile( __dirname + "/" + "characters.json", 'utf8', function (err, data) {
      var heroes = JSON.parse( data );
-     var charactr = heroes.characterDetails[(req.params.id)-1] 
+     var charid=req.params.id;
+     var charactr = heroes.characterDetails[charid];
      console.log( charactr );
      res.end( JSON.stringify(charactr));
   });
@@ -48,19 +49,25 @@ app.post("/addCharacter",function (req, res) {
   }
   
 })
-/*
-var id = 2;
-
 app.delete("/deleteCharacter", function (req, res) {
   fs.readFile(__dirname + "/" + "characters.json", "utf8", function ( err, data) 
   {
     data = JSON.parse(data);
-    delete data[id];
-
-    console.log(data);
+    console.log(req.body);
+    data['characterDetails'].splice((req.body.newChar)-1,1);
+    //console.log(data);
+    processFile(data);
     res.send(JSON.stringify(data));
   });
-});*/
+  function processFile(data){
+    console.log(data);
+    //fs.writeFile(__dirname+"/"+"characters.json",obj,'utf8',function(err){
+    // console.log(err);  })
+    fs.writeFileSync(__dirname + "/" + "characters.json",JSON.stringify(data,null,2)); 
+  
+  }
+
+});
 
 var server = app.listen(8080, function () {
   var host = server.address().address;
