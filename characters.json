@@ -1,0 +1,39 @@
+{
+  "characterDetails": [
+    {
+      "name": "Luke Skywalker",
+      "gender": "Male",
+      "movie": "Star Wars",
+      "actor": "Mark Hamill",
+      "id": 1
+    },
+    {
+      "name": "Tony Stark",
+      "gender": "Male",
+      "movie": "Iron Man",
+      "actor": "Rober Downey Jr.",
+      "id": 2
+    },
+    {
+      "name": "Bruce Wayne",
+      "gender": "Male",
+      "movie": "Batman Triology",
+      "actor": "Christain Bale",
+      "id": 3
+    },
+    {
+      "name": "Wonder Woman",
+      "gender": "Female",
+      "movie": "Justice League",
+      "actor": "Gal Gadot",
+      "id": 4
+    },
+    {
+      "name": "Utkarsh",
+      "gender": "male",
+      "movie": "abc ",
+      "actor": "dante",
+      "id": "5"
+    }
+  ]
+}

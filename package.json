@@ -1,0 +1,22 @@
+{
+  "name": "nodeapi",
+  "version": "1.0.0",
+  "description": "my first nope api",
+  "main": "script.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dexie": "^3.0.3",
+    "express": "^4.17.1",
+    "idb": "^6.0.0",
+    "indexeddb": "0.0.0",
+    "indexeddb-export-import": "^2.1.2",
+    "joi": "^17.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Utkarsh",
+  "license": "ISC"
+}
