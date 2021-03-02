@@ -11,7 +11,9 @@
     "idb": "^6.0.0",
     "indexeddb": "0.0.0",
     "indexeddb-export-import": "^2.1.2",
-    "joi": "^17.4.0"
+    "joi": "^17.4.0",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.18"
   },
   "devDependencies": {},
   "scripts": {

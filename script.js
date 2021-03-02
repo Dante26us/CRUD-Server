@@ -4,10 +4,14 @@ var app = express();
 var fs = require("fs");
 var bodyParser = require('body-parser');
 const { send } = require('process');
+const MongoClient = require("mongodb").MongoClient;
+
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
+
+var url = 'mongodb://localhost:27017/';
 
 app.get("/listCharacters", function (req, res) {
   fs.readFile(__dirname + "/" + "characters.json", "utf8", function (err,data) {
@@ -24,6 +28,20 @@ app.get('/:id', function (req, res) {
      console.log( charactr );
      res.end( JSON.stringify(charactr));
   });
+/*
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("character_Data");
+    dbo.collection("characters").findOne({
+        name: req.params.name
+    }, 
+    function(err, result) {
+        if (err) throw err;
+        res.json(result);
+        db.close();
+    });
+});
+*/
 })
 
 
