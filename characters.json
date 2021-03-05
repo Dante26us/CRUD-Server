@@ -1,6 +1,13 @@
 {
   "characterDetails": [
     {
+      "name": "Luke Skywalker",
+      "gender": "Male",
+      "movie": "Star Wars",
+      "actor": "Mark Hamill",
+      "id": 1
+    },
+    {
       "name": "Tony Stark",
       "gender": "Male",
       "movie": "Iron Man",

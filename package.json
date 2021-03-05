@@ -1,24 +1,20 @@
 {
-  "name": "nodeapi",
+  "name": "server",
   "version": "1.0.0",
-  "description": "my first nope api",
+  "description": "",
   "main": "script.js",
+  "scripts": {
+    "start":"node app.js",
+    "devStart":"nodemon app.js"
+  },
+  "author": "Utkarsh",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "dexie": "^3.0.3",
     "express": "^4.17.1",
-    "idb": "^6.0.0",
-    "indexeddb": "0.0.0",
-    "indexeddb-export-import": "^2.1.2",
-    "joi": "^17.4.0",
-    "mongodb": "^3.6.4",
-    "mongoose": "^5.11.18"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Utkarsh",
-  "license": "ISC"
+    "file-system": "^2.2.2",
+    "mongoose": "^5.11.15",
+    "nodemon": "^2.0.7"
+  }
 }

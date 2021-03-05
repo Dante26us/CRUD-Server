@@ -3,24 +3,76 @@ var cors=require('cors');
 var app = express();
 var fs = require("fs");
 var bodyParser = require('body-parser');
+var mongoose=require('mongoose');
 const { send } = require('process');
-const MongoClient = require("mongodb").MongoClient;
+const CharacterModel=require("./models/char.js")
 
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
-var url = 'mongodb://localhost:27017/';
 
-app.get("/listCharacters", function (req, res) {
-  fs.readFile(__dirname + "/" + "characters.json", "utf8", function (err,data) {
+mongoose.connect('mongodb+srv://new_user:nodeApi@crud.2ozfb.mongodb.net/characters?retryWrites=true&w=majority',{
+  useNewUrlParser:true,
+  useUnifiedTopology: true 
+});
+
+app.get('/:charId',async (req, res)=> {
+  var chId=req.params.charId;
+  //console.log(chId);
+  CharacterModel.findOne({characterId: chId},(err,result)=>{
+    //console.log(result)   
+    if(err){     
+      res.send(err);
+    }
+   res.send(result);
+  })
+});
+
+app.post("/addCharacter",async (req,res) =>{
+  const newChar={
+    'name':req.body.name,
+    'gender':req.body.gender,
+    'movie':req.body.movie,
+    'actor':req.body.actor,
+    'characterId':req.body.characterId
+  };
+  console.log(newChar)
+  const char=new CharacterModel(newChar);
+  try{
+    await char.save();
+    console.log('saved data');
+    res.send(JSON.stringify(char));
+  }
+  catch(err){
+    console.log(err);
+  }
+});
+
+app.delete("/deleteCharacter",async (req,res)=>{
+  var chId=req.body.newChar;
+  console.log(chId);
+  await CharacterModel.findOneAndDelete({characterId: chId},(err,result)=>{
+    if(err){     
+      res.send(err);
+    }
+   res.send(result);
+  })
+});
+  
+
+ app.listen(8080, () => {
+  console.log("Example app listening at 8080");
+});
+
+/*fs.readFile(__dirname + "/" + "characters.json", "utf8", function (err,data) {
     console.log(data);
     res.end(data);
   });
 });
-app.get('/:id', function (req, res) {
-  // First read existing users.
+app.get('/:id',async function (req, res) {
+  
   fs.readFile( __dirname + "/" + "characters.json", 'utf8', function (err, data) {
      var heroes = JSON.parse( data );
      var charid=req.params.id;
@@ -28,20 +80,20 @@ app.get('/:id', function (req, res) {
      console.log( charactr );
      res.end( JSON.stringify(charactr));
   });
-/*
-  MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("character_Data");
-    dbo.collection("characters").findOne({
-        name: req.params.name
-    }, 
-    function(err, result) {
-        if (err) throw err;
-        res.json(result);
-        db.close();
-    });
-});
-*/
+  const character=new CharacterModel({
+    name : "Luke Skywalker",
+    gender: "Male",
+    movie: "Star Wars",
+    actor: "Mark Hamill"
+      
+  });/*
+  try{
+    await character.save();
+  }
+  catch(err){
+    console.log(err);
+  }
+
 })
 
 
@@ -85,12 +137,4 @@ app.delete("/deleteCharacter", function (req, res) {
   
   }
 
-});
-
-var server = app.listen(8080, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-  //console.log(host)
-  console.log("Example app listening at http://%s:%s",host,port);
-});
-
+});*/
