@@ -5,7 +5,7 @@ var fs = require("fs");
 var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 const { send } = require('process');
-const CharacterModel=require("./models/char.js")
+const CharacterModel=require("./models/char")
 
 
 app.use(cors())
@@ -61,6 +61,32 @@ app.delete("/deleteCharacter",async (req,res)=>{
   })
 });
   
+app.put("/update/:characterId", async (req,res)=>{
+  
+  //const chId=req.params.charId;
+  //console.log(chId);
+  const newCharName=req.body.name
+  const newGender=req.body.gender
+  const newMovie=req.body.movie
+  const newActor=req.body.actor
+  var charId=req.body.characterId
+  //console.log(charId);
+    await CharacterModel.findOneAndUpdate({characterId:charId},{new:true},(error,updateCharacter) => {
+      if(error){
+        console.log(error);
+      }
+      updateCharacter.name=newCharName;
+      updateCharacter.gender=newGender;
+      //console.log(updateCharacter.name);
+      updateCharacter.movie=newMovie;
+      updateCharacter.actor=newActor;
+      updateCharacter.characterId=charId;
+      updateCharacter.save();
+      res.send("updated");
+      
+    })
+  }
+)
 
  app.listen(8080, () => {
   console.log("Example app listening at 8080");
